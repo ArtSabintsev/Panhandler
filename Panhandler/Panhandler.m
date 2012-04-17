@@ -127,7 +127,7 @@ static Panhandler *sharedInstance = nil;
     // Output current number of events triggered
     (counter) ? NSLog(@"[%@: %d Events Triggered]", NSStringFromClass([self class]), counter) : NSLog(@"[%@: Counter Reset)", NSStringFromClass([self class]));
     
-    // Shows alertif conditions are satisfied    
+    // Shows alert if conditions are satisfied    
     switch (PanhandlerDebugMode) {
             
         case NO:                                                        // If 'Debug Mode' is IS NOT enabled
@@ -179,10 +179,10 @@ static Panhandler *sharedInstance = nil;
 - (UIAlertView*)initializeAlertView
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:PanhandlerAlertTitle 
-                                                         message:PanhandlerAlertMessage 
-                                                        delegate:self 
-                                               cancelButtonTitle:PanhandlerNoMessage 
-                                               otherButtonTitles:PanhandlerYesMessage, PanhandlerRemindMeLaterMessage, nil];
+                                                        message:PanhandlerAlertMessage 
+                                                       delegate:self 
+                                              cancelButtonTitle:PanhandlerNoMessage 
+                                              otherButtonTitles:PanhandlerYesMessage, PanhandlerRemindMeLaterMessage, nil];
     
     return alertView;
 }
@@ -197,8 +197,8 @@ static Panhandler *sharedInstance = nil;
             break;
         case 1:{        // Yes
             
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PanhandlerAppStoreLink]];   // Show App Store review page
-            [self disableTracking];                                                                 // Disable tracking
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PanhandlerAppStoreLink]];
+            [self disableTracking];                                                                    
             
         }break;
         case 2:         // Remind Me Later
