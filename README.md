@@ -49,7 +49,10 @@ The rest of the code is heavily commented, so customization/forking should be a 
 
 ### Inspired by:
 - [Appirater](http://github.com/arashpayan/appirater/) 
-- Big Thanks to [iceberg901](http://github.com/iceberg901/) for the Panhandler name.
+
+### Thanks:
+- [iceberg901](http://github.com/iceberg901/) for the Panhandler name.
+- Created for [Shelby.tv](http://www.shelby.tv) at Cyberdyne Systems NYC
 
 ###  Release Notes (v1.0.0):
 - Initial Release
