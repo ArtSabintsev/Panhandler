@@ -2,7 +2,7 @@
 //  Panhandler.m
 //  Panhandler
 //
-//  Created by Arthur at Shelby.tv on 4/15/12.
+//  Created by Arthur Ariel Sabintsev at Shelby.tv on 4/15/12.
 //  Copyright (c) 2012 ArtSabintsev. All rights reserved.
 //
 
@@ -22,12 +22,6 @@
 #define PanhandlerAppVersion                    [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey]           
 #define PanhandlerAppStoreLink                  [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", PanhandlerAppleID]
 
-// UIAlertView String Identifiers
-#define PanhandlerAlertTitle                    [NSString stringWithFormat:@"Rate %@", PanhandlerAppName]       
-#define PanhandlerAlertMessage                  [NSString stringWithFormat:@"Thanks for being an active %@ user! Please take a moment and tell us how we're doing!", PanhandlerAppName]
-#define PanhandlerNoMessage                     @"No, Thanks!"                                             
-#define PanhandlerYesMessage                    [NSString stringWithFormat:@"Yes, I'll rate %@", PanhandlerAppName]
-#define PanhandlerRemindMeLaterMessage          @"Remind Me Later"                                          
 
 #pragma mark - Private Declarations
 @interface Panhandler () <UIAlertViewDelegate>
@@ -98,6 +92,15 @@ static Panhandler *sharedInstance = nil;
     self.counter++;
 }
 
+- (void)recordEventWithWeight:(NSUInteger)weight
+{
+    // Check current version of app and perform reset if necessary
+    [self checkVersion];
+    
+    // Increment Counter (saves to NSUserDefaults in custom setter)
+    self.counter += weight;
+}
+
 #pragma mark - Private Methods
 - (void)defaultValues
 {
@@ -121,6 +124,9 @@ static Panhandler *sharedInstance = nil;
 - (void)checkNumberOfEventsTriggered:(NSUInteger)counter
 {
     
+    // Output current number of events triggered
+    (counter) ? NSLog(@"[%@: %d Events Triggered]", NSStringFromClass([self class]), counter) : NSLog(@"[%@: Counter Reset)", NSStringFromClass([self class]));
+    
     // Shows alertif conditions are satisfied    
     switch (PanhandlerDebugMode) {
             
@@ -128,7 +134,7 @@ static Panhandler *sharedInstance = nil;
             
             if ( ![self didChooseRemindMeLater] ) {                     // If 'Remind Me Later' IS NOT enabled
                 
-                if ( counter == PanhandlerTrigger ) {    
+                if ( counter >= PanhandlerTrigger ) {    
                     
                     UIAlertView *alertView = [self initializeAlertView];
                     [alertView show];
@@ -137,7 +143,7 @@ static Panhandler *sharedInstance = nil;
                 
             } else if ( [self didChooseRemindMeLater] ) {               // If 'Remind Me Later' IS enabled
                 
-                if ( counter == PanhandlerRetrigger ) {
+                if ( counter >= PanhandlerRetrigger ) {
                     
                     UIAlertView *alertView = [self initializeAlertView];
                     [alertView show];
@@ -147,9 +153,6 @@ static Panhandler *sharedInstance = nil;
             } break;
             
         case YES:{                                                      // If 'Debug Mode IS enabled
-            
-            // Output current number of events triggered
-            NSLog(@"[%@: %d Events Triggered]", NSStringFromClass([self class]), counter);
             
             UIAlertView *alertView = [self initializeAlertView];
             [alertView show];
@@ -257,6 +260,7 @@ static Panhandler *sharedInstance = nil;
      perform check on total number of events triggered, 
      and show alert if conditions within 'checkNumberOfEventsTriggered:' are satisfied.
      */
+    
     if ( ![self trackingDisabled] ) [self checkNumberOfEventsTriggered:counter];
 }
 

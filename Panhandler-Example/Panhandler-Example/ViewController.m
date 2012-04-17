@@ -37,12 +37,12 @@
 
 - (IBAction)buttonTwo:(id)sender
 {
-    [[Panhandler sharedInstance] recordEvent];
+    [[Panhandler sharedInstance] recordEventWithWeight:2];
 }
 
 - (IBAction)buttonThree:(id)sender
 {
-    [[Panhandler sharedInstance] recordEvent];
+    [[Panhandler sharedInstance] recordEventWithWeight:3];
 }
 
 
