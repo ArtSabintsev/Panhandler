@@ -12,7 +12,7 @@
 
 // NSUserDefaults String Identifiers
 #define PanhandlerPreviouslyLaunched            @"PreviouslyLaunched" 
-#define PanhandlerTrackingDisabled              @"trackingDisabled"
+#define PanhandlerTrackingDisabled              @"TrackingDisabled"
 #define PanhandlerDidChooseRemindMeLater        @"DidChooseRemindMeLater"                                        
 #define PanhandlerCounter                       @"Counter"                                                  
 #define PanhandlerVersion                       @"Version"                                                  
@@ -125,7 +125,7 @@ static Panhandler *sharedInstance = nil;
 {
     
     // Output current number of events triggered
-    (counter) ? NSLog(@"[%@: %d Events Triggered]", NSStringFromClass([self class]), counter) : NSLog(@"[%@: Counter Reset)", NSStringFromClass([self class]));
+    ( counter ) ? NSLog(@"[%@: %d Events Triggered]", NSStringFromClass([self class]), counter) : NSLog(@"[%@: Counter Reset)", NSStringFromClass([self class]));
     
     // Shows alert if conditions are satisfied    
     switch (PanhandlerDebugMode) {
@@ -141,7 +141,7 @@ static Panhandler *sharedInstance = nil;
                     
                 }
                 
-            } else if ( [self didChooseRemindMeLater] ) {               // If 'Remind Me Later' IS enabled
+            } else {                                                    // If 'Remind Me Later' IS enabled
                 
                 if ( counter >= PanhandlerRetrigger ) {
                     
@@ -152,7 +152,7 @@ static Panhandler *sharedInstance = nil;
                 
             } break;
             
-        case YES:{                                                      // If 'Debug Mode IS enabled
+        case YES:{                                                      // If 'Debug Mode' IS enabled
             
             UIAlertView *alertView = [self initializeAlertView];
             [alertView show];
@@ -167,13 +167,13 @@ static Panhandler *sharedInstance = nil;
 - (void)disableTracking
 {
     [self setTrackingDisabled:YES];
-    self.counter = 0;
+    [self setCounter:0];
 }
 
 - (void)enableRemindMeLater
 {
-    self.didChooseRemindMeLater = YES;
-    self.counter = 0;
+    [self setDidChooseRemindMeLater:YES];
+    [self setCounter:0];
 }
 
 - (UIAlertView*)initializeAlertView
@@ -193,17 +193,21 @@ static Panhandler *sharedInstance = nil;
     
     switch (buttonIndex) {
         case 0:         // No
+            
             [self disableTracking];
             break;
+            
         case 1:{        // Yes
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PanhandlerAppStoreLink]];
             [self disableTracking];                                                                    
-            
         }break;
+        
         case 2:         // Remind Me Later
+            
             [self enableRemindMeLater];
             break;
+        
         default:
             break;
     }
@@ -228,8 +232,6 @@ static Panhandler *sharedInstance = nil;
 {
     [[NSUserDefaults standardUserDefaults] setBool:trackingDisabled forKey:PanhandlerTrackingDisabled];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    
 }
 
 - (BOOL)trackingDisabled
