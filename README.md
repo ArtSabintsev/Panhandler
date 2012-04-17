@@ -49,7 +49,7 @@ The rest of the code is heavily commented, so customization/forking should be a 
 
 ### Inspired by:
 - [Appirater](http://github.com/arashpayan/appirater/) 
-- Big Thanks for [iceberg901](http://github.com/iceberg901/) for the Panhandler name.
+- Big Thanks to [iceberg901](http://github.com/iceberg901/) for the Panhandler name.
 
 ###  Release Notes (v1.0.0):
 - Initial Release
