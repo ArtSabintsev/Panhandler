@@ -5,7 +5,7 @@
 ### About
 **Panhandler** is an event-driven, ARC-complient singleton that reminds your users to rate and review your iOS app.
 
-![Screenshot of Panhandler](screenshot.png "Example Screenshot")
+![Screenshot of Panhandler](https://github.com/ArtSabintsev/Panhandler/blob/master/screenshot.png?raw=true "Example Screenshot")
 
 ### Installation Instructions:
 
