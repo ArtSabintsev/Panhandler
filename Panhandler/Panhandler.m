@@ -26,18 +26,18 @@
 #pragma mark - Private Declarations
 @interface Panhandler () <UIAlertViewDelegate>
 
-@property (unsafe_unretained, nonatomic)    BOOL        previouslyLaunched;     // Used to initialize default values on first launch
-@property (unsafe_unretained, nonatomic)    BOOL        didChooseRemindMeLater; // Flag used to remind user to rate app at a later time (when users selects 'Remind Me Later' in alertView)
-@property (unsafe_unretained, nonatomic)    BOOL        trackingDisabled;       // Flag used to enable/disable tracking and alertView display (when user selects 'NO' in alertView)
-@property (unsafe_unretained, nonatomic)    NSUInteger  counter;                // Keeps track of number of events triggered
-@property (copy, nonatomic)                 NSString    *version;               // Version of your app
+@property (assign, nonatomic)    BOOL        previouslyLaunched;        // Used to initialize default values on first launch
+@property (assign, nonatomic)    BOOL        didChooseRemindMeLater;    // Flag used to remind user to rate app at a later time (when users selects 'Remind Me Later' in alertView)
+@property (assign, nonatomic)    BOOL        trackingDisabled;          // Flag used to enable/disable tracking and alertView display (when user selects 'NO' in alertView)
+@property (assign, nonatomic)    NSUInteger  counter;                   // Keeps track of number of events triggered
+@property (copy, nonatomic)       NSString    *version;                 // Version of your app
 
-- (void)defaultValues;                                                          // Set and/or reset default values
-- (void)checkVersion;                                                           // Version Comparison method
-- (void)checkNumberOfEventsTriggered:(NSUInteger)counter;                       // Pop UIAlertView instance if certain conditions are satisfied
-- (void)enableRemindMeLater;                                                    // Enable 'Retrigger' state if 'Remind Me Later' is selected
-- (void)disableTracking;                                                        // Disable waseteful computation cycles if alert was displayed or 'NO' was selected
-- (UIAlertView*)initializeAlertView;                                            // Create new instance of UIAlertView
+- (void)defaultValues;                                                  // Set and/or reset default values
+- (void)checkVersion;                                                   // Version Comparison method
+- (void)checkNumberOfEventsTriggered:(NSUInteger)counter;               // Pop UIAlertView instance if certain conditions are satisfied
+- (void)enableRemindMeLater;                                            // Enable 'Retrigger' state if 'Remind Me Later' is selected
+- (void)disableTracking;                                                // Disable waseteful computation cycles if alert was displayed or 'NO' was selected
+- (UIAlertView*)initializeAlertView;                                    // Create new instance of UIAlertView
 
 @end
 
@@ -125,7 +125,7 @@ static Panhandler *sharedInstance = nil;
 {
     
     // Output current number of events triggered
-    ( counter ) ? NSLog(@"[%@: %d Events Triggered]", NSStringFromClass([self class]), counter) : NSLog(@"[%@: Counter Reset)", NSStringFromClass([self class]));
+    ( counter ) ? NSLog(@"[%@: %d Events Triggered]", NSStringFromClass([self class]), counter) : NSLog(@"[%@: Counter Reset]", NSStringFromClass([self class]));
     
     // Shows alert if conditions are satisfied    
     switch (PanhandlerDebugMode) {
