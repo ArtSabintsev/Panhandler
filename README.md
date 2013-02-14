@@ -50,13 +50,8 @@ The rest of the code is heavily commented, so customization/forking should be a 
 ### Inspired by:
 - [Appirater](http://github.com/arashpayan/appirater/) 
 
-###  Release Notes (v1.0.1):
-- Readability changes in Panhandler.m
-
-### Previous Release Notes
-
-#### v1.0.0
-- Initial Release
+###  Release Notes (v1.0.2):
+- Changed to using CFBundleShortVersionString for version check
 
 ### Recognition:
 - [iceberg901](http://github.com/iceberg901/) for the Panhandler name.

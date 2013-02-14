@@ -19,7 +19,7 @@
 
 // App Information
 #define PanhandlerAppName                       [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey]              
-#define PanhandlerAppVersion                    [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey]           
+#define PanhandlerAppVersion                    [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]          
 #define PanhandlerAppStoreLink                  [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", PanhandlerAppleID]
 
 
