@@ -2,8 +2,8 @@
 //  Panhandler.h
 //  Panhandler
 //
-//  Created by Arthur Ariel Sabintsev at Shelby.tv on 4/15/12.
-//  Copyright (c) 2012 ArtSabintsev. All rights reserved.
+//  Created by Arthur Ariel Sabintsev on 4/15/12.
+//  Copyright (c) 2012 Arthur Ariel Sabintsev. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

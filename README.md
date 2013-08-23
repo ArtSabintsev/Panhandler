@@ -1,11 +1,9 @@
 # Panhandler
 
-## Remind your active users to rate and review your iOS app
+## Remind your active users to rate your iOS app
 
 ### About
 **Panhandler** is an event-driven, ARC-complient singleton that reminds your users to rate and review your iOS app.
-
-![Screenshot of Panhandler](https://github.com/ArtSabintsev/Panhandler/blob/master/screenshot.png?raw=true "Example Screenshot")
 
 ### Installation Instructions:
 
@@ -50,8 +48,9 @@ The rest of the code is heavily commented, so customization/forking should be a 
 ### Inspired by:
 - [Appirater](http://github.com/arashpayan/appirater/) 
 
-###  Release Notes (v1.0.2):
-- Changed to using CFBundleShortVersionString for version check
+###  Release Notes (v1.0.3):
+- Modernized Code
+- Changed Attribution
 
 ### Contirbutors:
 - [iceberg901](http://github.com/iceberg901/) for the Panhandler name.

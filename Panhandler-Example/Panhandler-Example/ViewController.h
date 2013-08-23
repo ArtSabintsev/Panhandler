@@ -2,8 +2,8 @@
 //  ViewController.h
 //  Panhandler-Example
 //
-//  Created by Arthur on 4/16/12.
-//  Copyright (c) 2012 ArtSabintsev. All rights reserved.
+//  Created by Arthur Ariel Sabintsev on 4/16/12.
+//  Copyright (c) 2012 Arthur Ariel Sabintsev. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

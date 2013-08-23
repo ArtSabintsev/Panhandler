@@ -2,8 +2,8 @@
 //  Panhandler.m
 //  Panhandler
 //
-//  Created by Arthur Ariel Sabintsev at Shelby.tv on 4/15/12.
-//  Copyright (c) 2012 ArtSabintsev. All rights reserved.
+//  Created by Arthur Ariel Sabintsev on 4/15/12.
+//  Copyright (c) 2012 Arthur Ariel Sabintsev. All rights reserved.
 //
 
 #import "Panhandler.h"
@@ -26,31 +26,31 @@
 #pragma mark - Private Declarations
 @interface Panhandler () <UIAlertViewDelegate>
 
-@property (assign, nonatomic)    BOOL        previouslyLaunched;        // Used to initialize default values on first launch
-@property (assign, nonatomic)    BOOL        didChooseRemindMeLater;    // Flag used to remind user to rate app at a later time (when users selects 'Remind Me Later' in alertView)
-@property (assign, nonatomic)    BOOL        trackingDisabled;          // Flag used to enable/disable tracking and alertView display (when user selects 'NO' in alertView)
-@property (assign, nonatomic)    NSUInteger  counter;                   // Keeps track of number of events triggered
-@property (copy, nonatomic)       NSString    *version;                 // Version of your app
+@property (assign, nonatomic) BOOL previouslyLaunched;          // Used to initialize default values on first launch
+@property (assign, nonatomic) BOOL didChooseRemindMeLater;      // Flag used to remind user to rate app at a later time (when users selects 'Remind Me Later' in alertView)
+@property (assign, nonatomic) BOOL trackingDisabled;            // Flag used to enable/disable tracking and alertView display (when user selects 'NO' in alertView)
+@property (assign, nonatomic) NSUInteger counter;               // Keeps track of number of events triggered
+@property (copy, nonatomic)   NSString *version;                // Version of your app
 
-- (void)defaultValues;                                                  // Set and/or reset default values
-- (void)checkVersion;                                                   // Version Comparison method
-- (void)checkNumberOfEventsTriggered:(NSUInteger)counter;               // Pop UIAlertView instance if certain conditions are satisfied
-- (void)enableRemindMeLater;                                            // Enable 'Retrigger' state if 'Remind Me Later' is selected
-- (void)disableTracking;                                                // Disable waseteful computation cycles if alert was displayed or 'NO' was selected
-- (UIAlertView*)initializeAlertView;                                    // Create new instance of UIAlertView
+- (void)defaultValues;                                          // Set and/or reset default values
+- (void)checkVersion;                                           // Version Comparison method
+- (void)checkNumberOfEventsTriggered:(NSUInteger)counter;       // Pop UIAlertView instance if certain conditions are satisfied
+- (void)enableRemindMeLater;                                    // Enable 'Retrigger' state if 'Remind Me Later' is selected
+- (void)disableTracking;                                        // Disable waseteful computation cycles if alert was displayed or 'NO' was selected
+- (UIAlertView *)initializeAlertView;                            // Create new instance of UIAlertView
 
 @end
 
 @implementation Panhandler
 
-static Panhandler *sharedInstance = nil;
-
 #pragma mark - Singleton Methods
-+ (Panhandler*)sharedInstance
++ (id)sharedInstance
 {
-    if (sharedInstance == nil) {
-        sharedInstance = [[super allocWithZone:NULL] init];
-    }
+    static id sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
     return sharedInstance;
 }
 
@@ -69,16 +69,6 @@ static Panhandler *sharedInstance = nil;
         
     }
     
-    return self;
-}
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [self sharedInstance];
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
     return self;
 }
 
@@ -176,7 +166,7 @@ static Panhandler *sharedInstance = nil;
     [self setCounter:0];
 }
 
-- (UIAlertView*)initializeAlertView
+- (UIAlertView *)initializeAlertView
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:PanhandlerAlertTitle 
                                                         message:PanhandlerAlertMessage 
@@ -214,7 +204,7 @@ static Panhandler *sharedInstance = nil;
     
 }
 
-#pragma mark - Accessor Methods that utilize NSUserDefaults
+#pragma mark - NSUserDefaults
 // previouslyLaunched
 - (void)setPreviouslyLaunched:(BOOL)previouslyLaunched
 {
@@ -259,11 +249,13 @@ static Panhandler *sharedInstance = nil;
     
     /*
      If user has not previously clicked 'No' on an alertView, 
-     perform check on total number of events triggered, 
+     perform check on total number of events triggered,
      and show alert if conditions within 'checkNumberOfEventsTriggered:' are satisfied.
      */
     
-    if ( ![self trackingDisabled] ) [self checkNumberOfEventsTriggered:counter];
+    if ( ![self trackingDisabled] ) {
+        [self checkNumberOfEventsTriggered:counter];
+    }
 }
 
 - (NSUInteger)counter
