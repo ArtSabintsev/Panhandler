@@ -115,42 +115,35 @@
 {
     
     // Output current number of events triggered
-    ( counter ) ? NSLog(@"[%@: %d Events Triggered]", NSStringFromClass([self class]), counter) : NSLog(@"[%@: Counter Reset]", NSStringFromClass([self class]));
+    ( counter ) ? NSLog(@"[%@: %lu Events Triggered]", NSStringFromClass([self class]), (unsigned long)counter) : NSLog(@"[%@: Counter Reset]", NSStringFromClass([self class]));
     
-    // Shows alert if conditions are satisfied    
-    switch (PanhandlerDebugMode) {
+    // Shows alert if conditions are satisfied
+    
+    if (YES == PanhandlerDebugMode) {                                   // If 'Debug Mode' IS enabled
+    
+        UIAlertView *alertView = [self initializeAlertView];
+        [alertView show];
+    
+    } else {                                                            // If 'Debug Mode IS NOT enabled
+        
+        if (![self didChooseRemindMeLater]) {                           // If 'Remind Me Later' IS NOT enabled
             
-        case NO:                                                        // If 'Debug Mode' is IS NOT enabled
-            
-            if ( ![self didChooseRemindMeLater] ) {                     // If 'Remind Me Later' IS NOT enabled
+            if (counter >= PanhandlerTrigger) {
                 
-                if ( counter >= PanhandlerTrigger ) {    
-                    
-                    UIAlertView *alertView = [self initializeAlertView];
-                    [alertView show];
-                    
-                }
+                UIAlertView *alertView = [self initializeAlertView];
+                [alertView show];
                 
-            } else {                                                    // If 'Remind Me Later' IS enabled
+            }
+            
+        } else {                                                        // If 'Remind Me Later' IS enabled
+            
+            if (counter >= PanhandlerRetrigger) {
                 
-                if ( counter >= PanhandlerRetrigger ) {
-                    
-                    UIAlertView *alertView = [self initializeAlertView];
-                    [alertView show];
-                    
-                }
+                UIAlertView *alertView = [self initializeAlertView];
+                [alertView show];
                 
-            } break;
-            
-        case YES:{                                                      // If 'Debug Mode' IS enabled
-            
-            UIAlertView *alertView = [self initializeAlertView];
-            [alertView show];
-            
-        } break;
-            
-        default:
-            break;
+            }
+        }
     }
 }
 

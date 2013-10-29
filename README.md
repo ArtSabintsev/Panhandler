@@ -5,6 +5,9 @@
 ### About
 **Panhandler** is an event-driven, ARC-complient singleton that reminds your users to rate and review your iOS app.
 
+###  Release Notes (v1.0.4):
+- Addressed LLVM 5 issues
+
 ### Installation Instructions:
 
 1. Copy the 'Panhandler' folder into your Xcode project. The following files will be added:
@@ -48,10 +51,6 @@ The rest of the code is heavily commented, so customization/forking should be a 
 ### Inspired by:
 - [Appirater](http://github.com/arashpayan/appirater/) 
 
-###  Release Notes (v1.0.3):
-- Modernized Code
-- Changed Attribution
-
 ### Contirbutors:
 - [iceberg901](http://github.com/iceberg901/) for the Panhandler name.
 
@@ -61,7 +60,7 @@ Created by [Arthur Ariel Sabintsev](http://www.sabintsev.com)
 
 ### License
 The MIT License (MIT)
-Copyright (c) 2012 Arthur Ariel Sabintsev
+Copyright (c) 2012-2013 Arthur Ariel Sabintsev
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
